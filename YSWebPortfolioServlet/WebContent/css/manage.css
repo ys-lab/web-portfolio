@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+table.page-modify {
+	margin: 10px;
+}
+
+table.page-modify th {
+	width: 25%;
+	height: 35px;
+}
+
+table.page-modify td {
+	
+}
+
+table.page-modify input {
+	width: 100%;
+}
