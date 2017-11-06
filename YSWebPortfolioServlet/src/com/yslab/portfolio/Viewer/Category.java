@@ -37,7 +37,17 @@ public class Category extends Index {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		String categoryContentList = "";
+		
+		ContentLoader contentLoader = new ContentLoader();
+		categoryContentList = contentLoader.loadSubTopicContentAll(con).toJSONString();
+		
 		String target = request.getParameter("target");
+		
+		//JSONObject topicLink = new JSONObject();
+		//String content = "";
+		//topicLink.put(TARGET_TOPIC_LINK, TARGET_HEAD + target);
 		
 		RequestDispatcher rd = null;
 		
@@ -45,6 +55,7 @@ public class Category extends Index {
 		request.setAttribute("tabMenuList", tabMenuList);
 		request.setAttribute("tabTopicList", tabTopicList);
 		request.setAttribute("tabSubTopicList", tabSubTopicList);
+		request.setAttribute("categoryContentList", categoryContentList);
 		request.setAttribute("target", target);
 		
 		rd = request.getRequestDispatcher("category.jsp");

@@ -31,26 +31,34 @@
 String menuTabList;
 String topicList;
 String topicSubList;
+String categoryContentList;
 String target;
-String content;
 
 JSONParser jsonParser = new JSONParser();
 
 JSONArray jsonMenuTabArray = new JSONArray();
 JSONArray jsonTopicArray = new JSONArray();
 JSONArray jsonTopicSubArray = new JSONArray();
-JSONArray jsonContentArray = new JSONArray();
-JSONObject jsonContent = new JSONObject();
+JSONArray jsonCategoryContentArray = new JSONArray();
 
 menuTabList = request.getAttribute("tabMenuList").toString();
 topicList = request.getAttribute("tabTopicList").toString();
 topicSubList = request.getAttribute("tabSubTopicList").toString();
+categoryContentList = request.getAttribute("categoryContentList").toString();
 target = request.getAttribute("target").toString();
 
-jsonMenuTabArray = (JSONArray) jsonParser.parse(menuTabList);
-jsonTopicArray = (JSONArray) jsonParser.parse(topicList);
-jsonTopicSubArray = (JSONArray) jsonParser.parse(topicSubList);
+try{
 
+	jsonMenuTabArray = (JSONArray) jsonParser.parse(menuTabList);
+	jsonTopicArray = (JSONArray) jsonParser.parse(topicList);
+	jsonTopicSubArray = (JSONArray) jsonParser.parse(topicSubList);
+	jsonCategoryContentArray = (JSONArray) jsonParser.parse(categoryContentList);
+
+	System.out.println("size :" + jsonCategoryContentArray.size());
+	
+} catch (Exception e){
+	
+}
 
 String check = "";
 
@@ -111,7 +119,12 @@ String check = "";
                                 		String tabTopicName = topic.get("tab_topic_name").toString();
                                 		String tabTopicLink = topic.get("tab_topic_link").toString();
                                 		String tabMasterName = topic.get("tab_menu_name").toString();
-                                		String compare = tabTopicLink.substring(12);
+                                		String compare = "";
+                                		if(tabTopicLink.length() > 16){
+                                			compare = tabTopicLink.substring(16);
+                                		}
+                                		
+                                		System.out.println(tabTopicLink + " " + target);
                                 		
                                 		if(tabMasterName.compareTo(tabMenuName) == 0){
                                 			out.write("	<li><a href='" + tabTopicLink + "' title='" + tabTopicTitle + "'>" + tabTopicName + "</a></li>");
@@ -144,7 +157,7 @@ String check = "";
                 <div class="col-sm-12">
                     <ol class="breadcrumb">
                         <li><a href="#" title="Post">Home</a></li>
-                        <li class="active">Category Name</li>
+                        <li class="active"><%= check %></li>
                     </ol>                    
                 </div>
             </div>
@@ -154,208 +167,59 @@ String check = "";
         <div class="container">
             <div class="row">
                 <section class="category-content col-sm-9">
-                    <h2 class="category-title">CATEGORY NAME</h2>
+                    <h2 class="category-title">POST LISTS</h2>
                     <ul class="media-list">
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#" title="Post">
-                                    <img class="media-object" src="img/h1.jpeg" alt="Post">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h3 class="media-heading"><a href="#" title="Post Title">Post Title</a></h3>
-                                <p>Aenean vitae dolor sed purus tempus ullamcorper. Integer urna orci, lacinia ut ornare sit amet, luctus quis est. Ut interdum lorem in mattis lobortis. Maecenas tincidunt justo a lobortis facilisis.</p>
-                                <aside class="meta category-meta">
-                                    <div class="pull-left">
-                                        <div class="arc-comment"><a href="#" title="Comment"><i class="fa fa-comments"></i> 0 Comment</a></div>
-                                        <div class="arc-date">10/15/2016</div>
-                                    </div>
-                                    <div class="pull-right">
-                                        <ul class="arc-share">
-                                            <li><a href="#" title="Post"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#" title="Post"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#" title="Post"><i class="fa fa-linkedin"></i></a></li>
-                                            <li><a href="#" title="Post"><i class="fa fa-google-plus"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </aside>                                
-                            </div>
-                        </li>
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#" title="Post">
-                                    <img class="media-object" src="img/h2.jpg" alt="Post">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h3 class="media-heading"><a href="#" title="Post Title">Post Title</a></h3>
-                                <p>Aenean vitae dolor sed purus tempus ullamcorper. Integer urna orci, lacinia ut ornare sit amet, luctus quis est. Ut interdum lorem in mattis lobortis. Maecenas tincidunt justo a lobortis facilisis.</p>
-                                <aside class="meta category-meta">
-                                    <div class="pull-left">
-                                        <div class="arc-comment"><a href="#" title="Comment"><i class="fa fa-comments"></i> 1 Comment</a></div>
-                                        <div class="arc-date">10/15/2016</div>
-                                    </div>
-                                    <div class="pull-right">
-                                        <ul class="arc-share">
-                                            <li><a href="#" title="Post"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#" title="Post"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#" title="Post"><i class="fa fa-linkedin"></i></a></li>
-                                            <li><a href="#" title="Post"><i class="fa fa-google-plus"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </aside>                                
-                            </div>
-                        </li>
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#" title="Post">
-                                    <img class="media-object" src="img/h3.jpeg" alt="Post">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h3 class="media-heading"><a href="#" title="Post Title">Post Title</a></h3>
-                                <p>Aenean vitae dolor sed purus tempus ullamcorper. Integer urna orci, lacinia ut ornare sit amet, luctus quis est. Ut interdum lorem in mattis lobortis. Maecenas tincidunt justo a lobortis facilisis.</p>
-                                <aside class="meta category-meta">
-                                    <div class="pull-left">
-                                        <div class="arc-comment"><a href="#" title="Comment"><i class="fa fa-comments"></i> 2 Comments</a></div>
-                                        <div class="arc-date">10/15/2016</div>
-                                    </div>
-                                    <div class="pull-right">
-                                        <ul class="arc-share">
-                                            <li><a href="#" title="Post"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#" title="Post"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#" title="Post"><i class="fa fa-linkedin"></i></a></li>
-                                            <li><a href="#" title="Post"><i class="fa fa-google-plus"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </aside>                                
-                            </div>
-                        </li>
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#" title="Post">
-                                    <img class="media-object" src="img/h4.jpeg" alt="Post">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h3 class="media-heading"><a href="#" title="Post Title">Post Title</a></h3>
-                                <p>Aenean vitae dolor sed purus tempus ullamcorper. Integer urna orci, lacinia ut ornare sit amet, luctus quis est. Ut interdum lorem in mattis lobortis. Maecenas tincidunt justo a lobortis facilisis.</p>
-                                <aside class="meta category-meta">
-                                    <div class="pull-left">
-                                        <div class="arc-comment"><a href="#" title="Comment"><i class="fa fa-comments"></i> 2 Comments</a></div>
-                                        <div class="arc-date">10/15/2016</div>
-                                    </div>
-                                    <div class="pull-right">
-                                        <ul class="arc-share">
-                                            <li><a href="#" title="Post"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#" title="Post"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#" title="Post"><i class="fa fa-linkedin"></i></a></li>
-                                            <li><a href="#" title="Post"><i class="fa fa-google-plus"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </aside>                                
-                            </div>
-                        </li>
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#" title="Post">
-                                    <img class="media-object" src="img/h1.jpeg" alt="Post">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h3 class="media-heading"><a href="#" title="Post Title">Post Title</a></h3>
-                                <p>Aenean vitae dolor sed purus tempus ullamcorper. Integer urna orci, lacinia ut ornare sit amet, luctus quis est. Ut interdum lorem in mattis lobortis. Maecenas tincidunt justo a lobortis facilisis.</p>
-                                <aside class="meta category-meta">
-                                    <div class="pull-left">
-                                        <div class="arc-comment"><a href="#" title="Comment"><i class="fa fa-comments"></i> 12 Comments</a></div>
-                                        <div class="arc-date">10/15/2016</div>
-                                    </div>
-                                    <div class="pull-right">
-                                        <ul class="arc-share">
-                                            <li><a href="#" title="Post"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#" title="Post"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#" title="Post"><i class="fa fa-linkedin"></i></a></li>
-                                            <li><a href="#" title="Post"><i class="fa fa-google-plus"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </aside>                                
-                            </div>
-                        </li>
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#" title="Post">
-                                    <img class="media-object" src="img/h2.jpg" alt="Post">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h3 class="media-heading"><a href="#" title="Post Title">Post Title</a></h3>
-                                <p>Aenean vitae dolor sed purus tempus ullamcorper. Integer urna orci, lacinia ut ornare sit amet, luctus quis est. Ut interdum lorem in mattis lobortis. Maecenas tincidunt justo a lobortis facilisis.</p>
-                                <aside class="meta category-meta">
-                                    <div class="pull-left">
-                                        <div class="arc-comment"><a href="#" title="Comment"><i class="fa fa-comments"></i> 2 Comments</a></div>
-                                        <div class="arc-date">10/15/2016</div>
-                                    </div>
-                                    <div class="pull-right">
-                                        <ul class="arc-share">
-                                            <li><a href="#" title="Post"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#" title="Post"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#" title="Post"><i class="fa fa-linkedin"></i></a></li>
-                                            <li><a href="#" title="Post"><i class="fa fa-google-plus"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </aside>                                
-                            </div>
-                        </li>
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#" title="Post">
-                                    <img class="media-object" src="img/h3.jpeg" alt="Post">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h3 class="media-heading"><a href="#" title="Post Title">Post Title</a></h3>
-                                <p>Aenean vitae dolor sed purus tempus ullamcorper. Integer urna orci, lacinia ut ornare sit amet, luctus quis est. Ut interdum lorem in mattis lobortis. Maecenas tincidunt justo a lobortis facilisis.</p>
-                                <aside class="meta category-meta">
-                                    <div class="pull-left">
-                                        <div class="arc-comment"><a href="#" title="Comment"><i class="fa fa-comments"></i> 3 Comments</a></div>
-                                        <div class="arc-date">10/15/2016</div>
-                                    </div>
-                                    <div class="pull-right">
-                                        <ul class="arc-share">
-                                            <li><a href="#" title="Post"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#" title="Post"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#" title="Post"><i class="fa fa-linkedin"></i></a></li>
-                                            <li><a href="#" title="Post"><i class="fa fa-google-plus"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </aside>                                
-                            </div>
-                        </li>
-                        <li class="media">
-                            <div class="media-left">
-                                <a href="#" title="Post">
-                                    <img class="media-object" src="img/h4.jpeg" alt="Post">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h3 class="media-heading"><a href="#" title="Post Title">Post Title</a></h3>
-                                <p>Aenean vitae dolor sed purus tempus ullamcorper. Integer urna orci, lacinia ut ornare sit amet, luctus quis est. Ut interdum lorem in mattis lobortis. Maecenas tincidunt justo a lobortis facilisis.</p>
-                                <aside class="meta category-meta">
-                                    <div class="pull-left">
-                                        <div class="arc-comment"><a href="#" title="Comment"><i class="fa fa-comments"></i> 8 Comments</a></div>
-                                        <div class="arc-date">10/15/2016</div>
-                                    </div>
-                                    <div class="pull-right">
-                                        <ul class="arc-share">
-                                            <li><a href="#" title="Post"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#" title="Post"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#" title="Post"><i class="fa fa-linkedin"></i></a></li>
-                                            <li><a href="#" title="Post"><i class="fa fa-google-plus"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </aside>                                
-                            </div>
-                        </li>                        
+                        <%
+                        
+                        	try{
+                        		int count=0;
+                        		for(int i=0; i<jsonCategoryContentArray.size(); i++){
+                            		JSONObject topic = (JSONObject) jsonCategoryContentArray.get(i);
+                            		String title = topic.get("title").toString();
+                            		String context = topic.get("content").toString();
+                            		String tabTopicName = topic.get("tab_topic_name").toString();
+                            		String thumbnailLink = topic.get("thumbnail_link").toString();
+                            		String topicLink = topic.get("topic_link").toString();
+                            		String tabMasterName = topic.get("tab_menu_name").toString();
+                            		
+                            		System.out.println(title + context + tabTopicName + topicLink);
+                            		
+                            		if(check.equals(tabMasterName)){
+                            			out.write("<li class='media " + tabMasterName + "'>");
+                                		out.write("	<div class='media-left'>");
+                                		out.write("	<a href='#' title='Post'>");
+                                		out.write("		<img class='media-object' src='" + thumbnailLink + "' alt='Post'>");
+                                		out.write("	</a>");
+                                		out.write("	</div>");
+                                		out.write("	<div class='media-body'>");
+                                		out.write("		<h3 class='media-heading'><a href='#' title='Post Title'>" + title + "</a></h3>");
+                                		out.write("		<div class='media-context'>" + context + "</div>");
+                                		out.write("		<aside class='meta category-meta'>");
+                                		out.write("			<div class='pull-left'>");
+                                		out.write("				<div class='arc-comment'><a href='#' title='Comment'><i class='fa fa-comments'></i> 0 Comment</a></div>");
+                                		out.write("				<div class='arc-date'>10/15/2016</div>");
+                                		out.write("			</div>");
+                                		out.write("		<div class='pull-right'>");
+                                		out.write("			<ul class='arc-share'>");
+                                		out.write("				<li><a href='#' title='Post'><i class='fa fa-facebook'></i></a></li>");
+                                		out.write("				<li><a href='#' title='Post'><i class='fa fa-twitter'></i></a></li>");
+                                		out.write("				<li><a href='#' title='Post'><i class='fa fa-linkedin'></i></a></li>");
+                                		out.write("				<li><a href='#' title='Post'><i class='fa fa-google-plus'></i></a></li>");
+                                		out.write("			</ul>");
+                                		out.write("		</div>");
+                                		out.write("		</aside>   ");
+                                		out.write("	</div>");
+                                		out.write("</li>");
+                                		count++;
+                            		}
+                            	}
+                        		if(count == 0){
+                        			out.write("there had no article");
+                        		}
+                        	} catch (Exception e) {
+                        		out.write("there had no article");
+                        	}
+                        %>                     
                     </ul>                    
                 </section>
                 <aside class="sidebar col-sm-3">

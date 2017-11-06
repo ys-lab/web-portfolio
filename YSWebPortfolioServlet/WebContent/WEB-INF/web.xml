@@ -10,7 +10,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Index</servlet-name>
-    <url-pattern>/Index/*</url-pattern>
+    <url-pattern>/Index</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>Manage</servlet-name>

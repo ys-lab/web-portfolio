@@ -9,10 +9,6 @@ public class TabListLoader {
 	
 	Retriever rt = new Retriever();
 	
-	public TabListLoader(){
-		
-	}
-	
 	public JSONArray getTabMenuList(Connection con){
 		System.out.println("at getList :");
 		return rt.getAllFrom(con, "tab_menu_lists");

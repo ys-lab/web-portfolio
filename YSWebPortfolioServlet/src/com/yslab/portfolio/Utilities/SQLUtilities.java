@@ -288,15 +288,6 @@ public class SQLUtilities {
 			for(int i=0; i<num; i++) {
 				int type = rsmd.getColumnType(i+1);
 				switch(type) {
-					case Types.CHAR:
-					case Types.NCHAR:
-					case Types.VARCHAR:
-					case Types.NVARCHAR:
-					case Types.LONGVARCHAR:
-					case Types.LONGNVARCHAR:
-						jsonObject.put(rsmd.getColumnName(i+1), rs.getString(i+1));
-						System.out.println(rsmd.getColumnName(i+1) + " " + rs.getString(i+1));
-						break;
 					case Types.BIGINT:
 					case Types.SMALLINT:
 					case Types.TINYINT:
@@ -306,6 +297,18 @@ public class SQLUtilities {
 						break;
 					case Types.FLOAT:
 						jsonObject.put(rsmd.getColumnName(i+1), rs.getFloat(i+1));
+						System.out.println(rsmd.getColumnName(i+1) + " " + rs.getString(i+1));
+						break;
+					case Types.BLOB:
+					case Types.CLOB:
+					case Types.CHAR:
+					case Types.NCHAR:
+					case Types.VARCHAR:
+					case Types.NVARCHAR:
+					case Types.LONGVARCHAR:
+					case Types.LONGNVARCHAR:
+					default:
+						jsonObject.put(rsmd.getColumnName(i+1), rs.getString(i+1));
 						System.out.println(rsmd.getColumnName(i+1) + " " + rs.getString(i+1));
 						break;
 				}

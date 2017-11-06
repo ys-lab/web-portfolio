@@ -23,7 +23,7 @@ import com.yslab.portfolio.Utilities.DBConnector;
 public class Index extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static Connection con;
-	private TabListLoader tabListLoader = new TabListLoader();
+	public TabListLoader tabListLoader = new TabListLoader();
 	
 	public static String tabMenuList = null;
 	public static String tabTopicList = null;
@@ -56,7 +56,7 @@ public class Index extends HttpServlet {
     public String getTabSubTopicList() {
     	return tabSubTopicList;
     }
-    
+
     public void setTabMenuList() {
     	tabMenuList = tabListLoader.getTabMenuList(con).toJSONString();
     }

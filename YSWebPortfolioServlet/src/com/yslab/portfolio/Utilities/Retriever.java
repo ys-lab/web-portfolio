@@ -20,6 +20,7 @@ public class Retriever extends SQLUtilities {
 		
 		JSONArray jsonArray = new JSONArray();
 		String sql = "select * from " + DB_NAME + TableName;
+		System.out.println(sql);
 
         try {
 			PreparedStatement pstmt = con.prepareStatement(sql);

@@ -15,4 +15,25 @@ public class ContentLoader {
 		
 		return rt.getAllByConditionFrom(con, "tab_topic_contents", target);
 	}
+	
+	public JSONArray loadSubTopicContent(Connection con, JSONObject target) {
+		Retriever rt = new Retriever();
+		System.out.println("at loadTopic :");
+		
+		return rt.getAllByConditionFrom(con, "tab_topic_sub_contents", target);
+	}
+	
+	public JSONArray loadSubTopicContentTop5(Connection con, JSONObject target) {
+		Retriever rt = new Retriever();
+		System.out.println("at loadTopic :");
+		
+		return rt.getAllByConditionFrom(con, "tab_topic_sub_contents", target);
+	}
+	
+	public JSONArray loadSubTopicContentAll(Connection con) {
+		Retriever rt = new Retriever();
+		System.out.println("at loadSubTopicContentAll :");
+		
+		return rt.getAllFrom(con, "tab_topic_sub_contents");
+	}
 }

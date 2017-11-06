@@ -163,6 +163,7 @@ ul.big li:nth-child(2n) {margin-left: 2%;}
 .category-main ul.arc-share li {float: left;list-style: none;margin-left: 10px;}
 .category-main .archive-cat a {color: #ff1515;}
 .category-main .archive-cat a:hover {color: #333; text-decoration: none;}
+.category-main .media-object { width: 262px; height: 200px }
 
 
 /* Sidebar */
